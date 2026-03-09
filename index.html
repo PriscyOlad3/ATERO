@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    h1, h2, h3, .brand-font { font-family: 'Playfair Display', serif; }
     
     /* This code hides the scrollbar but keeps the swipe functionality */
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -22,8 +22,8 @@
 
   <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="#" class="text-2xl font-semibold text-gray-900">
-        <img src="images/logo.jpg" alt="ATERO Logo" class="h-10 w-auto">
+      <a href="#" class="text-3xl font-bold text-gray-900 tracking-widest brand-font uppercase">
+        ATERO
       </a>
       <div class="hidden md:flex space-x-10 text-sm font-medium uppercase tracking-wider">
         <a href="#home" class="hover:text-gray-500 transition">Home</a>
@@ -34,7 +34,7 @@
     </div>
   </nav>
 
-  <section id="home" class="min-h-screen flex items-center bg-cover bg-center relative" style="background-image: url('images/nightwear-2.jpg');">
+  <section id="home" class="min-h-screen flex items-center bg-cover bg-center relative" style="background-image: url('images/logo.jpg');">
     <div class="absolute inset-0 bg-black/50"></div>
     <div class="relative max-w-5xl mx-auto px-6 text-center text-white">
       <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Master your climate</h1>
@@ -95,4 +95,11 @@
         </div>
 
         <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
-          <img src="images/nightwear-12.jpg" alt="Nightwear 12
+          <img src="images/nightwear-12.jpg" alt="Nightwear 12" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-13.jpg" alt="Nightwear 13" class="w-full h-[28rem] object-cover">
+        </div>
+
+      </div>
