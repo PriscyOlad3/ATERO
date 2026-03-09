@@ -12,15 +12,17 @@
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
     h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    
+    /* This code hides the scrollbar but keeps the swipe functionality */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Navbar -->
   <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="#" class="text-2xl font-semibold text-gray-900">
-        <!-- Your logo will go here once uploaded -->
         <img src="images/logo.png" alt="ATERO Logo" class="h-10 w-auto">
       </a>
       <div class="hidden md:flex space-x-10 text-sm font-medium uppercase tracking-wider">
@@ -32,7 +34,6 @@
     </div>
   </nav>
 
-  <!-- Hero -->
   <section id="home" class="min-h-screen flex items-center bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');">
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="relative max-w-5xl mx-auto px-6 text-center text-white">
@@ -42,71 +43,68 @@
     </div>
   </section>
 
-  <!-- Featured Collections -->
   <section id="collections" class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-6">
       <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Our Collections</h2>
-      <p class="text-center text-gray-600
-            <section id="collections" class="py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-4xl md:text-5xl font-bold text-center mb-6">Our Collections</h2>
-        <p class="text-center text-gray-600 ... ">...</p>
+      <p class="text-center text-gray-600 max-w-2xl mx-auto">Swipe to explore our exclusive and elegant nightwear pieces.</p>
 
-        <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-1.jpg" alt="Nightwear 1" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-2.jpg" alt="Nightwear 2" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-3.jpg" alt="Nightwear 3" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-4.jpg" alt="Nightwear 4" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-5.jpg" alt="Nightwear 5" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-          
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-6.jpg" alt="Nightwear 6" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-7.jpg" alt="Nightwear 7" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-8.jpg" alt="Nightwear 8" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-9.jpg" alt="Nightwear 9" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-10.jpg" alt="Nightwear 10" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-11.jpg" alt="Nightwear 11" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-12.jpg" alt="Nightwear 12" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
-          <div class="group relative overflow-hidden rounded-lg shadow-md">
-            <img src="images/nightwear-13.jpg" alt="Nightwear 13" class="w-full h-96 object-cover transition duration-300 group-hover:scale-105">
-          </div>
-
+      <div class="mt-12 flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 w-full no-scrollbar">
+        
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-1.jpg" alt="Nightwear 1" class="w-full h-[28rem] object-cover">
         </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-2.jpg" alt="Nightwear 2" class="w-full h-[28rem] object-cover">
         </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-3.jpg" alt="Nightwear 3" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-4.jpg" alt="Nightwear 4" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-5.jpg" alt="Nightwear 5" class="w-full h-[28rem] object-cover">
+        </div>
+        
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-6.jpg" alt="Nightwear 6" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-7.jpg" alt="Nightwear 7" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-8.jpg" alt="Nightwear 8" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-9.jpg" alt="Nightwear 9" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-10.jpg" alt="Nightwear 10" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-11.jpg" alt="Nightwear 11" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-12.jpg" alt="Nightwear 12" class="w-full h-[28rem] object-cover">
+        </div>
+
+        <div class="snap-center shrink-0 w-80 rounded-lg overflow-hidden shadow-md">
+          <img src="images/nightwear-13.jpg" alt="Nightwear 13" class="w-full h-[28rem] object-cover">
+        </div>
+
+      </div>
+    </div>
   </section>
-  
+
+</body>
+</html>
