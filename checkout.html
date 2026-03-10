@@ -32,10 +32,10 @@
       <div>
         <h2 class="text-2xl font-semibold mb-4">Contact Information</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" id="first-name" placeholder="First name" class="input-field">
-          <input type="text" id="last-name" placeholder="Last name" class="input-field">
+          <input type="text" id="first-name" placeholder="First name" class="input-field" required>
+          <input type="text" id="last-name" placeholder="Last name" class="input-field" required>
           <input type="email" id="email" placeholder="Email address" class="input-field">
-          <input type="tel" id="phone" placeholder="Phone number" class="input-field">
+          <input type="tel" id="phone" placeholder="Phone number" class="input-field" required>
         </div>
       </div>
 
@@ -43,11 +43,17 @@
         <h2 class="text-2xl font-semibold mb-4">Delivery Method</h2>
         <div class="space-y-3">
           <label class="flex items-center justify-between border border-black p-4 rounded cursor-pointer bg-white">
-            <div class="flex items-center"><input type="radio" name="delivery" class="mr-3" checked> <span class="font-medium text-sm">Standard delivery (5-6 days)</span></div>
+            <div class="flex items-center">
+              <input type="radio" name="delivery" class="mr-3" checked onchange="updateDeliveryFee(0, 'FREE', 'Standard Delivery')"> 
+              <span class="font-medium text-sm">Standard delivery (5-6 days)</span>
+            </div>
             <span class="font-bold text-sm">FREE</span>
           </label>
           <label class="flex items-center justify-between border border-gray-300 p-4 rounded cursor-pointer bg-white hover:border-black">
-            <div class="flex items-center"><input type="radio" name="delivery" class="mr-3"> <span class="font-medium text-sm">Express delivery (1-2 days)</span></div>
+            <div class="flex items-center">
+              <input type="radio" name="delivery" class="mr-3" onchange="updateDeliveryFee(15, '$15.00', 'Express Delivery')"> 
+              <span class="font-medium text-sm">Express delivery (1-2 days)</span>
+            </div>
             <span class="font-bold text-sm">$15.00</span>
           </label>
         </div>
@@ -58,7 +64,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input type="text" id="country" placeholder="Country" class="input-field">
           <input type="text" id="city" placeholder="City" class="input-field">
-          <input type="text" id="address" placeholder="Address" class="input-field">
+          <input type="text" id="address" placeholder="Address" class="input-field" required>
           <input type="text" id="postal" placeholder="Postal code" class="input-field">
         </div>
       </div>
@@ -69,19 +75,20 @@
       
       <div class="bg-white border border-gray-200 rounded p-6">
         
-        <div id="cart-items-container" class="space-y-6 mb-6">
-          </div>
+        <div id="cart-items-container" class="space-y-6 mb-6"></div>
 
         <div class="space-y-3 text-sm border-t border-gray-200 pt-6">
           <div class="flex justify-between"><span class="text-gray-600">Subtotal</span><span id="subtotal" class="font-semibold">$0.00</span></div>
-          <div class="flex justify-between"><span class="text-gray-600">Delivery cost</span><span class="font-semibold">FREE</span></div>
+          <div class="flex justify-between"><span class="text-gray-600">Delivery cost</span><span id="delivery-cost-display" class="font-semibold">FREE</span></div>
           <div class="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-200">
             <span>Total to pay</span>
             <span id="total-price">$0.00</span>
           </div>
         </div>
 
-        <button onclick="checkoutToWhatsApp()" class="w-full mt-6 bg-black text-white py-3 font-bold rounded hover:bg-gray-800 transition">Place Order via WhatsApp</button>
+        <button onclick="checkoutToWhatsApp()" class="w-full mt-6 bg-green-600 text-white py-3 font-bold rounded hover:bg-green-700 transition flex justify-center items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-xl"></i> Place Order via WhatsApp
+        </button>
         <p class="text-[10px] text-gray-500 text-center mt-3"><i class="fa-solid fa-lock mr-1"></i> By proceeding I accept the Terms & Conditions</p>
 
       </div>
@@ -95,24 +102,34 @@
   </footer>
 
   <script>
-    // 1. Load cart from memory
     let rawCart = JSON.parse(localStorage.getItem('atero_cart')) || [];
     let cart = [];
+    
+    // Variables to track delivery
+    let deliveryFee = 0;
+    let deliveryText = 'FREE';
+    let deliveryMethodName = 'Standard Delivery';
 
-    // 2. Consolidate items and set defaults (Quantity, Size, Color)
+    // Consolidate items
     rawCart.forEach(item => {
       let existing = cart.find(i => i.name === item.name);
       if (existing) { existing.quantity += 1; } 
       else { cart.push({...item, quantity: 1, size: 'M', color: 'Black'}); }
     });
 
-    // Save consolidated cart back to memory
     function saveCart() {
       localStorage.setItem('atero_cart', JSON.stringify(cart));
       renderCart();
     }
 
-    // 3. Render Cart HTML
+    // Update Delivery Fee Function
+    function updateDeliveryFee(fee, text, methodName) {
+      deliveryFee = fee;
+      deliveryText = text;
+      deliveryMethodName = methodName;
+      renderCart(); // Re-render the cart so the total updates immediately!
+    }
+
     function renderCart() {
       const container = document.getElementById('cart-items-container');
       
@@ -124,11 +141,11 @@
       }
 
       let cartHTML = '';
-      let totalAmount = 0;
+      let subtotalAmount = 0;
 
       cart.forEach((item, index) => {
         let itemTotal = item.price * item.quantity;
-        totalAmount += itemTotal;
+        subtotalAmount += itemTotal;
 
         cartHTML += `
           <div class="flex gap-4 items-start border-b border-gray-100 pb-6">
@@ -168,28 +185,90 @@
         `;
       });
 
+      let finalTotal = subtotalAmount + deliveryFee;
+
       container.innerHTML = cartHTML;
-      document.getElementById('subtotal').innerText = `$${totalAmount.toFixed(2)}`;
-      document.getElementById('total-price').innerText = `$${totalAmount.toFixed(2)}`;
+      document.getElementById('subtotal').innerText = `$${subtotalAmount.toFixed(2)}`;
+      document.getElementById('delivery-cost-display').innerText = deliveryText;
+      document.getElementById('total-price').innerText = `$${finalTotal.toFixed(2)}`;
     }
 
-    // 4. Change Quantity Function
     function changeQty(index, change) {
       cart[index].quantity += change;
-      if (cart[index].quantity < 1) cart[index].quantity = 1; // Prevent going below 1
+      if (cart[index].quantity < 1) cart[index].quantity = 1; 
       saveCart();
     }
 
-    // 5. Update Size/Color Function
     function updateDetail(index, type, value) {
       cart[index][type] = value;
       saveCart();
     }
 
-    // 6. Remove Item Function
     function removeItem(index) {
       cart.splice(index, 1);
       saveCart();
+    }
+
+    // WHATSAPP CHECKOUT FUNCTION
+    function checkoutToWhatsApp() {
+      if (cart.length === 0) {
+        alert("Your cart is empty! Please add some items before checking out.");
+        return;
+      }
+
+      // Grab customer details from the form
+      let fName = document.getElementById('first-name').value;
+      let lName = document.getElementById('last-name').value;
+      let phone = document.getElementById('phone').value;
+      let address = document.getElementById('address').value;
+      let city = document.getElementById('city').value;
+      let country = document.getElementById('country').value;
+
+      // Basic validation
+      if (!fName || !phone || !address) {
+        alert("Please fill in your First Name, Phone Number, and Address so we can process your order!");
+        return;
+      }
+
+      // Build the message
+      let message = `*NEW ORDER FROM ATERO* 🛍️\n\n`;
+      
+      message += `*Customer Details:*\n`;
+      message += `Name: ${fName} ${lName}\n`;
+      message += `Phone: ${phone}\n`;
+      message += `Address: ${address}, ${city}, ${country}\n\n`;
+
+      message += `*Order Items:*\n`;
+      let subtotalAmount = 0;
+      
+      cart.forEach((item, index) => {
+        let itemTotal = item.price * item.quantity;
+        subtotalAmount += itemTotal;
+        message += `${index + 1}. *${item.name}*\n`;
+        message += `   Qty: ${item.quantity} | Size: ${item.size} | Color: ${item.color}\n`;
+        message += `   Price: $${itemTotal.toFixed(2)}\n`;
+      });
+
+      let finalTotal = subtotalAmount + deliveryFee;
+
+      message += `\n*Order Summary:*\n`;
+      message += `Subtotal: $${subtotalAmount.toFixed(2)}\n`;
+      message += `Delivery (${deliveryMethodName}): ${deliveryText}\n`;
+      message += `*Total to Pay: $${finalTotal.toFixed(2)}*\n\n`;
+      message += `Please confirm my order.`;
+
+      // ⚠️ IMPORTANT: Replace this with your actual WhatsApp Phone Number!
+      // Include country code (e.g., 234 for Nigeria) but DO NOT include the + or any dashes.
+      let myWhatsAppNumber = "2340000000000"; 
+      
+      let encodedMessage = encodeURIComponent(message);
+      let whatsappURL = `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`;
+
+      // Open WhatsApp
+      window.open(whatsappURL, '_blank');
+      
+      // Optional: Clear the cart after they send the order
+      // localStorage.removeItem('atero_cart'); 
     }
 
     // Run on load
