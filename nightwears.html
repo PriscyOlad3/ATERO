@@ -26,7 +26,7 @@
         <a href="#" class="hover:text-black transition"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="#" class="hover:text-black transition"><i class="fa-brands fa-instagram"></i></a>
         <a href="#" class="hover:text-black transition"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="#" class="hover:text-black transition"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://tiktok.com/@wearatero" target="_blank" class="hover:text-black transition"><i class="fa-brands fa-tiktok"></i></a>
       </div>
     </div>
   </div>
@@ -37,6 +37,13 @@
       <a href="index.html" class="hover:text-red-600 transition pb-1">HOME</a>
       <a href="shop.html" class="text-red-600 border-b-2 border-red-600 pb-1">SHOP</a>
     </nav>
+    <div class="flex items-center space-x-6 text-xl">
+      <a href="#" class="hover:text-gray-500 transition"><i class="fa-regular fa-user"></i></a>
+      <a href="checkout.html" class="relative hover:text-gray-500 transition">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">0</span>
+      </a>
+    </div>
   </header>
 
   <div class="max-w-7xl mx-auto px-6 py-4 text-sm text-gray-500 border-t border-gray-100">
@@ -60,7 +67,7 @@
         </div>
         <h4 class="font-bold text-sm mt-auto">Midnight Cocoa Lounge Set</h4>
         <div class="text-sm mt-1 text-black font-bold">$150.00</div>
-        <button class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
+        <button onclick="addToCart(this, 'Midnight Cocoa Lounge Set', 150, 'images/nightwear-2.jpg')" class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
       </div>
 
       <div class="relative group cursor-pointer flex flex-col">
@@ -69,7 +76,7 @@
         </div>
         <h4 class="font-bold text-sm mt-auto">Crimson Lace Kimono</h4>
         <div class="text-sm mt-1 text-black font-bold">$110.00</div>
-        <button class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
+        <button onclick="addToCart(this, 'Crimson Lace Kimono', 110, 'images/nightwear-4.jpg')" class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
       </div>
 
       <div class="relative group cursor-pointer flex flex-col">
@@ -78,7 +85,7 @@
         </div>
         <h4 class="font-bold text-sm mt-auto">The signature Bordeaux Robe</h4>
         <div class="text-sm mt-1 text-black font-bold">$110.00</div>
-        <button class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
+        <button onclick="addToCart(this, 'The signature Bordeaux Robe', 110, 'images/nightwear-6.jpg')" class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
       </div>
 
       <div class="relative group cursor-pointer flex flex-col">
@@ -87,7 +94,7 @@
         </div>
         <h4 class="font-bold text-sm mt-auto">Azure Lace Ensemble</h4>
         <div class="text-sm mt-1 text-black font-bold">$110.00</div>
-        <button class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
+        <button onclick="addToCart(this, 'Azure Lace Ensemble', 110, 'images/nightwear-9.jpg')" class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
       </div>
 
       <div class="relative group cursor-pointer flex flex-col">
@@ -96,7 +103,7 @@
         </div>
         <h4 class="font-bold text-sm mt-auto">Aurora Blush Set</h4>
         <div class="text-sm mt-1 text-black font-bold">$110.00</div>
-        <button class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
+        <button onclick="addToCart(this, 'Aurora Blush Set', 110, 'images/nightwear-12.jpg')" class="w-full mt-3 border border-black py-2 text-sm font-semibold hover:bg-black hover:text-white transition">Add to cart</button>
       </div>
 
     </div>
@@ -106,6 +113,45 @@
     <h2 class="text-3xl font-bold tracking-widest brand-font uppercase mb-4">ATERO</h2>
     <p class="text-xs text-gray-500">&copy; 2026 ATERO. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Function to run when the page loads
+    function updateCartCount() {
+      // Look in the browser memory for 'atero_cart'. If empty, create an empty list [].
+      let cart = JSON.parse(localStorage.getItem('atero_cart')) || [];
+      // Update the little red number on the bag icon
+      document.getElementById('cart-count').innerText = cart.length;
+    }
+
+    // Function to run when "Add to cart" is clicked
+    function addToCart(button, name, price, image) {
+      let cart = JSON.parse(localStorage.getItem('atero_cart')) || [];
+      
+      // Add the new item to the list
+      cart.push({ name: name, price: price, image: image });
+      
+      // Save the updated list back to the browser's memory
+      localStorage.setItem('atero_cart', JSON.stringify(cart));
+      
+      // Update the cart number at the top
+      updateCartCount();
+
+      // Change button style for visual feedback
+      button.innerText = "Added! ✓";
+      button.classList.add("bg-green-600", "text-white", "border-green-600");
+      button.classList.remove("hover:bg-black", "hover:text-white");
+
+      // Change it back after 2 seconds
+      setTimeout(() => {
+        button.innerText = "Add to cart";
+        button.classList.remove("bg-green-600", "text-white", "border-green-600");
+        button.classList.add("hover:bg-black", "hover:text-white");
+      }, 2000);
+    }
+
+    // Run this the moment the page opens
+    updateCartCount();
+  </script>
 
 </body>
 </html>
