@@ -32,10 +32,10 @@
       <div>
         <h2 class="text-2xl font-semibold mb-4">Contact Information</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" placeholder="First name" class="input-field">
-          <input type="text" placeholder="Last name" class="input-field">
-          <input type="email" placeholder="Email address" class="input-field">
-          <input type="tel" placeholder="Phone number" class="input-field">
+          <input type="text" id="first-name" placeholder="First name" class="input-field">
+          <input type="text" id="last-name" placeholder="Last name" class="input-field">
+          <input type="email" id="email" placeholder="Email address" class="input-field">
+          <input type="tel" id="phone" placeholder="Phone number" class="input-field">
         </div>
       </div>
 
@@ -56,32 +56,10 @@
       <div>
         <h2 class="text-2xl font-semibold mb-4">Shipping Information</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" placeholder="Country" class="input-field">
-          <input type="text" placeholder="City" class="input-field">
-          <input type="text" placeholder="Address" class="input-field">
-          <input type="text" placeholder="Postal code" class="input-field">
-        </div>
-      </div>
-
-      <div>
-        <h2 class="text-2xl font-semibold mb-4">Payment Method</h2>
-        <div class="border border-gray-300 rounded bg-white overflow-hidden">
-          
-          <label class="flex items-center justify-between p-4 border-b border-gray-200 cursor-pointer bg-gray-50">
-            <div class="flex items-center"><input type="radio" name="payment" class="mr-3" checked> <span class="font-medium text-sm">Credit Card</span></div>
-            <i class="fa-brands fa-cc-visa text-xl"></i>
-          </label>
-          <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white border-b border-gray-200">
-            <input type="text" placeholder="Card number" class="input-field">
-            <input type="text" placeholder="Cardholder full name" class="input-field">
-            <input type="text" placeholder="Expiry date (MM/YY)" class="input-field">
-            <input type="text" placeholder="CVV" class="input-field">
-          </div>
-
-          <label class="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 transition">
-            <div class="flex items-center"><input type="radio" name="payment" class="mr-3"> <span class="font-medium text-sm">PayPal</span></div>
-            <i class="fa-brands fa-cc-paypal text-xl"></i>
-          </label>
+          <input type="text" id="country" placeholder="Country" class="input-field">
+          <input type="text" id="city" placeholder="City" class="input-field">
+          <input type="text" id="address" placeholder="Address" class="input-field">
+          <input type="text" id="postal" placeholder="Postal code" class="input-field">
         </div>
       </div>
     </div>
@@ -91,58 +69,19 @@
       
       <div class="bg-white border border-gray-200 rounded p-6">
         
-        <div class="space-y-6 mb-6">
-          
-          <div class="flex gap-4 items-start border-b border-gray-100 pb-6">
-            <img src="images/nightwear-2.jpg" class="w-20 h-24 object-cover rounded bg-gray-100">
-            <div class="flex-1">
-              <div class="flex justify-between">
-                <h4 class="font-bold text-sm">Midnight Cocoa Lounge Set</h4>
-                <span class="font-bold text-sm">$150.00</span>
-              </div>
-              <p class="text-xs text-gray-500 mt-1">Size: M | Color: Brown</p>
-              <div class="flex justify-between items-center mt-3">
-                <div class="flex items-center border border-gray-300 rounded text-sm">
-                  <button class="px-3 py-1 hover:bg-gray-100">-</button>
-                  <span class="px-3 border-x border-gray-300">1</span>
-                  <button class="px-3 py-1 hover:bg-gray-100">+</button>
-                </div>
-                <button class="text-xs text-red-600 underline font-semibold">Remove</button>
-              </div>
-            </div>
+        <div id="cart-items-container" class="space-y-6 mb-6">
           </div>
-
-          <div class="flex gap-4 items-start pb-2">
-            <img src="images/nightwear-6.jpg" class="w-20 h-24 object-cover rounded bg-gray-100">
-            <div class="flex-1">
-              <div class="flex justify-between">
-                <h4 class="font-bold text-sm">The signature Bordeaux Robe</h4>
-                <span class="font-bold text-sm">$110.00</span>
-              </div>
-              <p class="text-xs text-gray-500 mt-1">Size: S | Color: Red</p>
-              <div class="flex justify-between items-center mt-3">
-                <div class="flex items-center border border-gray-300 rounded text-sm">
-                  <button class="px-3 py-1 hover:bg-gray-100">-</button>
-                  <span class="px-3 border-x border-gray-300">1</span>
-                  <button class="px-3 py-1 hover:bg-gray-100">+</button>
-                </div>
-                <button class="text-xs text-red-600 underline font-semibold">Remove</button>
-              </div>
-            </div>
-          </div>
-
-        </div>
 
         <div class="space-y-3 text-sm border-t border-gray-200 pt-6">
-          <div class="flex justify-between"><span class="text-gray-600">Subtotal</span><span class="font-semibold">$260.00</span></div>
+          <div class="flex justify-between"><span class="text-gray-600">Subtotal</span><span id="subtotal" class="font-semibold">$0.00</span></div>
           <div class="flex justify-between"><span class="text-gray-600">Delivery cost</span><span class="font-semibold">FREE</span></div>
           <div class="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-200">
             <span>Total to pay</span>
-            <span>$260.00</span>
+            <span id="total-price">$0.00</span>
           </div>
         </div>
 
-        <button class="w-full mt-6 bg-black text-white py-3 font-bold rounded hover:bg-gray-800 transition">Pay Now</button>
+        <button onclick="checkoutToWhatsApp()" class="w-full mt-6 bg-black text-white py-3 font-bold rounded hover:bg-gray-800 transition">Place Order via WhatsApp</button>
         <p class="text-[10px] text-gray-500 text-center mt-3"><i class="fa-solid fa-lock mr-1"></i> By proceeding I accept the Terms & Conditions</p>
 
       </div>
@@ -155,6 +94,107 @@
     <p class="text-xs text-gray-500">&copy; 2026 ATERO. All rights reserved.</p>
   </footer>
 
+  <script>
+    // 1. Load cart from memory
+    let rawCart = JSON.parse(localStorage.getItem('atero_cart')) || [];
+    let cart = [];
+
+    // 2. Consolidate items and set defaults (Quantity, Size, Color)
+    rawCart.forEach(item => {
+      let existing = cart.find(i => i.name === item.name);
+      if (existing) { existing.quantity += 1; } 
+      else { cart.push({...item, quantity: 1, size: 'M', color: 'Black'}); }
+    });
+
+    // Save consolidated cart back to memory
+    function saveCart() {
+      localStorage.setItem('atero_cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    // 3. Render Cart HTML
+    function renderCart() {
+      const container = document.getElementById('cart-items-container');
+      
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="text-gray-500 text-center py-6">Your cart is currently empty.</p>';
+        document.getElementById('subtotal').innerText = "$0.00";
+        document.getElementById('total-price').innerText = "$0.00";
+        return;
+      }
+
+      let cartHTML = '';
+      let totalAmount = 0;
+
+      cart.forEach((item, index) => {
+        let itemTotal = item.price * item.quantity;
+        totalAmount += itemTotal;
+
+        cartHTML += `
+          <div class="flex gap-4 items-start border-b border-gray-100 pb-6">
+            <img src="${item.image}" class="w-20 h-24 object-cover rounded bg-gray-100">
+            <div class="flex-1">
+              <div class="flex justify-between">
+                <h4 class="font-bold text-sm">${item.name}</h4>
+                <span class="font-bold text-sm">$${itemTotal.toFixed(2)}</span>
+              </div>
+              
+              <div class="flex gap-2 mt-2">
+                <select onchange="updateDetail(${index}, 'size', this.value)" class="text-xs border border-gray-300 rounded p-1 outline-none">
+                  <option value="S" ${item.size === 'S' ? 'selected' : ''}>Size: S</option>
+                  <option value="M" ${item.size === 'M' ? 'selected' : ''}>Size: M</option>
+                  <option value="L" ${item.size === 'L' ? 'selected' : ''}>Size: L</option>
+                  <option value="XL" ${item.size === 'XL' ? 'selected' : ''}>Size: XL</option>
+                </select>
+                <select onchange="updateDetail(${index}, 'color', this.value)" class="text-xs border border-gray-300 rounded p-1 outline-none">
+                  <option value="Black" ${item.color === 'Black' ? 'selected' : ''}>Color: Black</option>
+                  <option value="Red" ${item.color === 'Red' ? 'selected' : ''}>Color: Red</option>
+                  <option value="White" ${item.color === 'White' ? 'selected' : ''}>Color: White</option>
+                  <option value="Blue" ${item.color === 'Blue' ? 'selected' : ''}>Color: Blue</option>
+                  <option value="Brown" ${item.color === 'Brown' ? 'selected' : ''}>Color: Brown</option>
+                </select>
+              </div>
+
+              <div class="flex justify-between items-center mt-3">
+                <div class="flex items-center border border-gray-300 rounded text-sm">
+                  <button onclick="changeQty(${index}, -1)" class="px-3 py-1 hover:bg-gray-100 transition">-</button>
+                  <span class="px-3 border-x border-gray-300">${item.quantity}</span>
+                  <button onclick="changeQty(${index}, 1)" class="px-3 py-1 hover:bg-gray-100 transition">+</button>
+                </div>
+                <button onclick="removeItem(${index})" class="text-xs text-red-600 underline font-semibold hover:text-red-800">Remove</button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = cartHTML;
+      document.getElementById('subtotal').innerText = `$${totalAmount.toFixed(2)}`;
+      document.getElementById('total-price').innerText = `$${totalAmount.toFixed(2)}`;
+    }
+
+    // 4. Change Quantity Function
+    function changeQty(index, change) {
+      cart[index].quantity += change;
+      if (cart[index].quantity < 1) cart[index].quantity = 1; // Prevent going below 1
+      saveCart();
+    }
+
+    // 5. Update Size/Color Function
+    function updateDetail(index, type, value) {
+      cart[index][type] = value;
+      saveCart();
+    }
+
+    // 6. Remove Item Function
+    function removeItem(index) {
+      cart.splice(index, 1);
+      saveCart();
+    }
+
+    // Run on load
+    renderCart();
+  </script>
+
 </body>
-                  </html>
-                  
+</html>
