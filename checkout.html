@@ -127,7 +127,7 @@
       deliveryFee = fee;
       deliveryText = text;
       deliveryMethodName = methodName;
-      renderCart(); // Re-render the cart so the total updates immediately!
+      renderCart(); 
     }
 
     function renderCart() {
@@ -216,7 +216,7 @@
         return;
       }
 
-      // Grab customer details from the form
+      // Grab customer details
       let fName = document.getElementById('first-name').value;
       let lName = document.getElementById('last-name').value;
       let phone = document.getElementById('phone').value;
@@ -257,18 +257,14 @@
       message += `*Total to Pay: $${finalTotal.toFixed(2)}*\n\n`;
       message += `Please confirm my order.`;
 
-      // ⚠️ IMPORTANT: Replace this with your actual WhatsApp Phone Number!
-      // Include country code (e.g., 234 for Nigeria) but DO NOT include the + or any dashes.
-      let myWhatsAppNumber = "2340000000000"; 
+      // YOUR UPDATED WHATSAPP NUMBER
+      let myWhatsAppNumber = "2349066686776"; 
       
       let encodedMessage = encodeURIComponent(message);
       let whatsappURL = `https://wa.me/${myWhatsAppNumber}?text=${encodedMessage}`;
 
       // Open WhatsApp
       window.open(whatsappURL, '_blank');
-      
-      // Optional: Clear the cart after they send the order
-      // localStorage.removeItem('atero_cart'); 
     }
 
     // Run on load
