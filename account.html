@@ -8,13 +8,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
+    body { font-family: 'Inter', system-ui, sans-serif; background-color: #fafafa; }
     h1, h2, h3, .brand-font { font-family: 'Playfair Display', serif; }
+    .hidden-section { display: none; }
   </style>
 </head>
-<body class="bg-white text-gray-800 flex flex-col min-h-screen">
+<body class="text-gray-800 flex flex-col min-h-screen">
 
-  <header class="py-6 px-6 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-4">
+  <header class="py-6 px-6 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-4 bg-white">
     <a href="index.html" class="text-4xl font-bold tracking-widest brand-font uppercase text-black">ATERO</a>
     <nav class="flex space-x-8 font-bold text-sm tracking-wide">
       <a href="index.html" class="hover:text-red-600 transition pb-1">HOME</a>
@@ -22,7 +23,7 @@
       <a href="about.html" class="hover:text-red-600 transition pb-1">ABOUT</a>
     </nav>
     <div class="flex items-center space-x-6 text-xl">
-      <a href="account.html" class="text-gray-500 transition"><i class="fa-solid fa-user"></i></a>
+      <a href="account.html" class="text-black transition"><i class="fa-solid fa-user"></i></a>
       <a href="checkout.html" class="relative hover:text-gray-500 transition">
         <i class="fa-solid fa-bag-shopping"></i>
         <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">0</span>
@@ -30,42 +31,93 @@
     </div>
   </header>
 
-  <div class="max-w-7xl mx-auto px-6 py-4 text-sm text-gray-500 border-t w-full border-gray-100">
-    <a href="index.html" class="hover:text-black">Home</a> > 
-    <span class="text-black font-semibold">Account</span>
+  <div class="max-w-7xl mx-auto px-6 py-4 text-sm text-gray-500 w-full">
+    <a href="index.html" class="hover:text-black">Home</a> > <span class="text-black font-semibold">Account</span>
   </div>
 
   <main class="flex-grow flex items-center justify-center px-6 py-12">
     <div class="w-full max-w-md bg-white border border-gray-200 p-8 shadow-sm">
       
-      <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold brand-font text-black mb-2">Welcome Back</h1>
-        <p class="text-sm text-gray-500">Sign in to your ATERO account.</p>
+      <div id="login-section">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold brand-font text-black mb-2">Sign In</h1>
+          <p class="text-sm text-gray-500">Access your ATERO account.</p>
+        </div>
+
+        <form onsubmit="loginUser(event)" class="space-y-5">
+          <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">Email Address</label>
+            <input type="email" id="login-email" class="w-full border border-gray-300 p-3 outline-none focus:border-black text-sm transition" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">Password</label>
+            <input type="password" id="login-pass" class="w-full border border-gray-300 p-3 outline-none focus:border-black text-sm transition" required>
+          </div>
+          <button type="submit" class="w-full bg-black text-white font-bold py-3 mt-4 hover:bg-gray-800 transition text-sm tracking-wider">
+            SIGN IN
+          </button>
+        </form>
+
+        <div class="mt-8 text-center text-sm border-t border-gray-200 pt-6">
+          <p class="text-gray-600 mb-3">Don't have an account?</p>
+          <button onclick="toggleView('register-section')" class="w-full border border-black text-black font-bold py-3 hover:bg-gray-50 transition text-sm tracking-wider">
+            CREATE ACCOUNT
+          </button>
+        </div>
       </div>
 
-      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-5">
-        <div>
-          <label class="block text-sm font-medium mb-1 text-gray-700">Email Address</label>
-          <input type="email" placeholder="Enter your email" class="w-full border border-gray-300 p-3 outline-none focus:border-black text-sm transition" required>
+      <div id="register-section" class="hidden-section">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold brand-font text-black mb-2">Create Account</h1>
+          <p class="text-sm text-gray-500">Join the world of ATERO.</p>
         </div>
-        <div>
-          <div class="flex justify-between items-center mb-1">
-            <label class="block text-sm font-medium text-gray-700">Password</label>
-            <a href="#" class="text-xs text-gray-500 hover:text-black underline">Forgot password?</a>
-          </div>
-          <input type="password" placeholder="Enter your password" class="w-full border border-gray-300 p-3 outline-none focus:border-black text-sm transition" required>
-        </div>
-        
-        <button type="submit" class="w-full bg-black text-white font-bold py-3 mt-4 hover:bg-gray-800 transition text-sm tracking-wider">
-          SIGN IN
-        </button>
-      </form>
 
-      <div class="mt-8 text-center text-sm border-t border-gray-200 pt-6">
-        <p class="text-gray-600 mb-3">Don't have an account?</p>
-        <button onclick="alert('Account creation is temporarily paused while we upgrade our systems. Please checkout as a guest!')" class="w-full border border-black text-black font-bold py-3 hover:bg-gray-50 transition text-sm tracking-wider">
-          CREATE ACCOUNT
-        </button>
+        <form onsubmit="registerUser(event)" class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1 text-gray-700">First Name</label>
+              <input type="text" id="reg-fname" class="w-full border border-gray-300 p-3 outline-none focus:border-black text-sm transition" required>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1 text-gray-700">Last Name</label>
+              <input type="text" id="reg-lname" class="w-full border border-gray-300 p-3 outline-none focus:border-black text-sm transition" required>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">Email Address</label>
+            <input type="email" id="reg-email" class="w-full border border-gray-300 p-3 outline-none focus:border-black text-sm transition" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1 text-gray-700">Password</label>
+            <input type="password" id="reg-pass" class="w-full border border-gray-300 p-3 outline-none focus:border-black text-sm transition" required>
+          </div>
+          <button type="submit" class="w-full bg-black text-white font-bold py-3 mt-4 hover:bg-gray-800 transition text-sm tracking-wider">
+            REGISTER
+          </button>
+        </form>
+
+        <div class="mt-6 text-center text-sm border-t border-gray-200 pt-6">
+          <button onclick="toggleView('login-section')" class="text-gray-500 hover:text-black font-semibold underline">
+            Back to Sign In
+          </button>
+        </div>
+      </div>
+
+      <div id="dashboard-section" class="hidden-section text-center">
+        <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl text-gray-400">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <h1 class="text-2xl font-bold brand-font text-black mb-2">Welcome, <span id="user-name-display">Guest</span>!</h1>
+        <p class="text-sm text-gray-500 mb-8">You are successfully logged into your ATERO account.</p>
+        
+        <div class="space-y-3">
+          <a href="shop.html" class="block w-full bg-black text-white font-bold py-3 hover:bg-gray-800 transition text-sm tracking-wider">
+            CONTINUE SHOPPING
+          </a>
+          <button onclick="logoutUser()" class="w-full border border-gray-300 text-gray-600 font-bold py-3 hover:bg-gray-50 transition text-sm tracking-wider">
+            SIGN OUT
+          </button>
+        </div>
       </div>
 
     </div>
@@ -77,20 +129,83 @@
   </footer>
 
   <script>
-    // Update Cart Counter
+    // 1. Update Cart Count
     function updateCartCount() {
       let cart = JSON.parse(localStorage.getItem('atero_cart')) || [];
       document.getElementById('cart-count').innerText = cart.length;
     }
-    updateCartCount();
 
-    // Handle fake login
-    function handleLogin(event) {
-      event.preventDefault(); // Prevents the page from refreshing
-      alert("Welcome to ATERO! This feature is currently in showcase mode.");
+    // 2. Toggle between Login, Register, and Dashboard views
+    function toggleView(viewId) {
+      document.getElementById('login-section').classList.add('hidden-section');
+      document.getElementById('register-section').classList.add('hidden-section');
+      document.getElementById('dashboard-section').classList.add('hidden-section');
+      document.getElementById(viewId).classList.remove('hidden-section');
     }
+
+    // 3. Register a new user
+    function registerUser(event) {
+      event.preventDefault();
+      let fname = document.getElementById('reg-fname').value;
+      let lname = document.getElementById('reg-lname').value;
+      let email = document.getElementById('reg-email').value;
+      let pass = document.getElementById('reg-pass').value;
+
+      let user = { firstName: fname, lastName: lname, email: email, password: pass };
+      
+      // Save to local storage
+      localStorage.setItem('atero_user', JSON.stringify(user));
+      
+      alert("Account created successfully! Please sign in.");
+      toggleView('login-section');
+      
+      // Clear form
+      document.getElementById('reg-fname').value = '';
+      document.getElementById('reg-lname').value = '';
+      document.getElementById('reg-email').value = '';
+      document.getElementById('reg-pass').value = '';
+    }
+
+    // 4. Log in an existing user
+    function loginUser(event) {
+      event.preventDefault();
+      let emailInput = document.getElementById('login-email').value;
+      let passInput = document.getElementById('login-pass').value;
+
+      let savedUser = JSON.parse(localStorage.getItem('atero_user'));
+
+      if (savedUser && savedUser.email === emailInput && savedUser.password === passInput) {
+        // Successful login
+        localStorage.setItem('atero_isLoggedIn', 'true');
+        checkLoginState();
+      } else {
+        alert("Incorrect email or password. Please try again or create an account.");
+      }
+    }
+
+    // 5. Log out
+    function logoutUser() {
+      localStorage.removeItem('atero_isLoggedIn');
+      checkLoginState();
+    }
+
+    // 6. Check if user is already logged in when the page loads
+    function checkLoginState() {
+      let isLoggedIn = localStorage.getItem('atero_isLoggedIn');
+      let savedUser = JSON.parse(localStorage.getItem('atero_user'));
+
+      if (isLoggedIn === 'true' && savedUser) {
+        document.getElementById('user-name-display').innerText = savedUser.firstName;
+        toggleView('dashboard-section');
+      } else {
+        toggleView('login-section');
+      }
+    }
+
+    // Run on page load
+    updateCartCount();
+    checkLoginState();
   </script>
 
 </body>
 </html>
-
