@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATERO.999 | Secure Vault</title>
+    <style>
+        /* THE CSS: Styling the Vault to look Ultra-Luxury */
+        body {
+            background-color: #050505; /* Deep luxury black */
+            color: #f4f4f4;
+            font-family: 'Courier New', Courier, monospace; /* Gives a tech/secure vibe */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .vault-container {
+            text-align: center;
+            border: 1px solid #222;
+            padding: 50px 30px;
+            background: linear-gradient(145deg, #111, #000);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            width: 85%;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: 6px;
+            margin-bottom: 5px;
+            color: #c0c0c0; /* The exact color of raw Silver */
+        }
+        p.subtitle {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+        input {
+            padding: 15px;
+            width: 80%;
+            background: #0a0a0a;
+            border: 1px solid #444;
+            color: #fff;
+            text-align: center;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            outline: none;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        input:focus {
+            border-color: #c0c0c0; /* Highlights silver when typing */
+        }
+        button {
+            padding: 15px 40px;
+            background: #c0c0c0;
+            color: #000;
+            border: none;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ffffff;
+        }
+        #message {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: bold;
+            height: 20px; /* Keeps the layout from jumping */
+        }
+        .error { color: #ff3333; }
+        .success { color: #c0c0c0; }
+    </style>
+</head>
+<body>
+
+    <div class="vault-container" id="lock-screen">
+        <h1>ATERO.999</h1>
+        <p class="subtitle">RESTRICTED ACCESS. ENTER VIP CODE.</p>
+        
+        <input type="password" id="passcode" placeholder="ENTER CODE">
+        <br>
+        <button onclick="checkCode()">UNLOCK</button>
+        
+        <p id="message"></p>
+    </div>
+
+    <script>
+        // Trigger checkCode when the user presses the "Enter" key
+        document.getElementById("passcode").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkCode();
+            }
+        });
+
+        function checkCode() {
+            // 1. Set the master password
+            let correctCode = "ATERO-VIP-77"; 
+            
+            // 2. Read what the CEO typed, remove extra spaces, and force uppercase
+            let userCode = document.getElementById("passcode").value.trim().toUpperCase();
+            let messageDisplay = document.getElementById("message");
+
+            // 3. Make the decision
+            if (userCode === correctCode) {
+                // If the code is right
+                messageDisplay.innerHTML = "ACCESS GRANTED. WELCOME, CEO.";
+                messageDisplay.className = "success";
+                
+                // Simulate opening the doors after 1.5 seconds
+                setTimeout(() => {
+                    document.getElementById("lock-screen").innerHTML = "<h1>ATERO.999</h1><br><p class='subtitle'>INITIALIZING .999 FINE ARGENTUM COLLECTION...</p>";
+                    
+                    // CRITICAL: Ensure this matches your showroom file name exactly!
+                    window.location.href = "argentum-suite.html"; 
+                }, 1500);
+
+            } else {
+                // If the code is wrong
+                messageDisplay.innerHTML = "INVALID CODE. ACCESS DENIED.";
+                messageDisplay.className = "error";
+            }
+        }
+    </script>
+
+</body>
+</html>
+
