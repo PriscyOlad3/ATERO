@@ -176,6 +176,7 @@
         }
         .apex-text li {
             margin-bottom: 10px;
+            line-height: 1.4;
         }
         .apex-btn {
             background: #5E0B30;
@@ -187,7 +188,7 @@
 
         /* --- THE ACQUISITION FORM OVERLAY --- */
         .modal-overlay {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.95);
@@ -295,15 +296,23 @@
                 <strong>There is a color that emperors died protecting.</strong>
                 <div class="read-more-btn" id="toggle-btn" onclick="toggleDossier()">[ + READ CLASSIFIED DOSSIER ]</div>
                 <div id="classified-dossier">
-                    For over two thousand years, Tyrian Purple wasn't just rare, it was restricted. In ancient Rome, to wear it without permission was treason. Punishable by death.
+                    For over two thousand years, Tyrian Purple wasn't just rare, it was restricted. In ancient Rome, to wear it without permission was treason. Not a fashion faux pas. Treason. Punishable by death. It was the color of gods and rulers, extracted from sea snails at a cost that made gold look accessible.
                     <br><br>
-                    <span style="color: #5E0B30; font-weight: bold;">We didn't try to recreate it. We sourced it.</span>
+                    <span style="color: #5E0B30; font-weight: bold; font-size: 1rem;">We didn't try to recreate it. We sourced it.</span>
                     <br><br>
+                    What you're looking at isn't a dress in purple. It's a garment built around a pigment that civilization once considered too powerful for ordinary people to possess.
+                    <br><br>
+                    <strong style="color: #888; font-size: 0.85rem; border-bottom: 1px solid #333; padding-bottom: 5px; display: inline-block;">What's inside it:</strong>
                     <ul>
-                        <li><strong>Solid 24-Karat gold closures</strong>—solid cast.</li>
-                        <li>Beneath the surface, a <strong>silver-ion matrix</strong> works invisibly. No odor. No bacteria.</li>
-                        <li>Woven into the fabric's core: <strong>phase-change materials</strong> holding you at exactly 37.5°C.</li>
+                        <li><strong>Five solid 24-Karat gold closures</strong>, not plated, not finished, cast anchor a peplum silhouette sharp enough to restructure the energy of any room you walk into.</li>
+                        <li>Beneath the surface, a <strong>silver-ion matrix</strong> works invisibly. No odor. No bacteria. No compromise ever.</li>
+                        <li>And woven into the fabric's core: <strong>phase-change materials</strong> that read your body's thermal output and respond in real time, holding you at exactly 37.5°C whether you're in a freezing boardroom or under a gala's full lights.</li>
                     </ul>
+                    <br>
+                    <div style="text-align: center; color: #fff; font-style: italic; font-size: 0.9rem; padding-top: 10px;">
+                        Nine women in the world will own this piece this year.<br>
+                        <span style="color: #5E0B30; font-weight: bold; font-style: normal;">You already know if you're one of them.</span>
+                    </div>
                 </div>
             </div>
             
@@ -404,7 +413,7 @@
         }
 
         function submitDossier() {
-            // ---> !!! CHANGE THIS EMAIL BELOW BEFORE UPLOADING TO GITHUB !!! <---
+            // *** DON'T FORGET TO CHANGE THIS EMAIL BEFORE LAUNCH ***
             var founderEmail = "founder@atero999.com"; 
             var subject = encodeURIComponent("Classified Inquiry: The Imperial Tyrian Peplum");
             
@@ -442,5 +451,4 @@
         }
     </script>
 </body>
-  </html>
-  
+</html>
